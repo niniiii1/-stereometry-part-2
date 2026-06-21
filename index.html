@@ -1,1 +1,707 @@
+გასაგებია! იმისათვის, რომ მასალა მაქსიმალურად ამომწურავად და სიღრმისეულად დამუშავდეს, ქვიზი გავზარდე **სრულ 45 კითხვამდე**. დავამატე კითხვები სპეციფიკურ თეორემებზე, კუთხეებზე (ორწახნაგა, გვერდითი წიბოს დახრის კუთხე ფუძესთან), ჩახაზულ და შემოხაზულ სფეროებზე, წესიერ მრავალკუთხედებზე ფუძეში და ყველა იმ ნიუანსზე, რაც შენს 17-ივე ფოტოშია მოცემული.
 
+ეს კოდი შეგიძლიათ პირდაპირ ჩაანაცვლოთ წინა ფაილში:
+
+```html
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>დიდი ქვიზი სტერეომეტრიაში: მრავალწახნაგები (45 კითხვა)</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --neutral-dark: #2c3e50;
+            --neutral-light: #f8f9fa;
+            --border-color: #dcdde1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #e9ecef;
+            color: var(--neutral-dark);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--neutral-dark);
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background-color: var(--neutral-dark);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 40px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .question-card {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--neutral-light);
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .diagram {
+            font-family: monospace;
+            white-space: pre;
+            background: #2c3e50;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow-x: auto;
+            line-height: 1.3;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            margin-bottom: 10px;
+        }
+
+        .option-item label {
+            display: block;
+            padding: 12px 15px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-item label:hover {
+            background: #edf2f7;
+            border-color: var(--primary-color);
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.1);
+        }
+
+        .correct-answer {
+            background-color: rgba(46, 204, 113, 0.2) !important;
+            border-color: var(--success-color) !important;
+        }
+
+        .wrong-answer {
+            background-color: rgba(231, 76, 60, 0.2) !important;
+            border-color: var(--error-color) !important;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #27ae60;
+        }
+
+        #result-box {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>📝 სრული საგამოცდო ქვიზი სტერეომეტრიაში</h1>
+    <p class="subtitle">მოიცავს 45 კითხვას ყველა ტიპის მრავალწახნაგასა და მათ თვისებებზე</p>
+
+    <form id="quiz-form">
+
+        <div class="section-title">ბლოკი 1: მრავალწახნაგები და ეილერის თეორემა</div>
+
+        <div class="question-card" data-q="q1">
+            <div class="question-text">1. რა პირობას უნდა აკმაყოფილებდეს მრავალწახნაგა, რომ მასზე შესრულდეს ეილერის ფორმულა F + V = E + 2?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q1" value="ა"> ა) უნდა იყოს აუცილებლად წესიერი</label></li>
+                <li class="option-item"><label><input type="radio" name="q1" value="ბ"> ბ) უნდა იყოს ამზნექილი</label></li>
+                <li class="option-item"><label><input type="radio" name="q1" value="გ"> გ) უნდა ჰქონდეს ლუწი რაოდენობის წახნაგები</label></li>
+                <li class="option-item"><label><input type="radio" name="q1" value="დ"> დ) უნდა იყოს მხოლოდ პირამიდა ან პრიზმა</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q2">
+            <div class="question-text">2. ამზნექილ მრავალწახნაგას აქვს 12 წახნაგი და 30 წიბო. რას უდრის მისი წვეროების რაოდენობა?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q2" value="ა"> ა) 14</label></li>
+                <li class="option-item"><label><input type="radio" name="q2" value="ბ"> ბ) 20</label></li>
+                <li class="option-item"><label><input type="radio" name="q2" value="გ"> გ) 18</label></li>
+                <li class="option-item"><label><input type="radio" name="q2" value="დ"> დ) 16</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q3">
+            <div class="question-text">3. მრავალწახნაგას აქვს 8 წვერო და 6 წახნაგი. რომელი ფიგურა შეიძლება იყოს ის?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q3" value="ა"> ა) ექვსკუთხა პირამიდა</label></li>
+                <li class="option-item"><label><input type="radio" name="q3" value="ბ"> ბ) ოთხკუთხა პრიზმა</label></li>
+                <li class="option-item"><label><input type="radio" name="q3" value="გ"> გ) სამკუთხა პრიზმა</label></li>
+                <li class="option-item"><label><input type="radio" name="q3" value="დ"> დ) ოქტაედრი</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q4">
+            <div class="question-text">4. თუ n-კუთხა პრიზმის წიბოების რაოდენობაა 24, რას უდრის მისი ფუძის გვერდების რაოდენობა (n)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q4" value="ა"> ა) 12</label></li>
+                <li class="option-item"><label><input type="radio" name="q4" value="ბ"> ბ) 8</label></li>
+                <li class="option-item"><label><input type="radio" name="q4" value="გ"> გ) 6</label></li>
+                <li class="option-item"><label><input type="radio" name="q4" value="დ"> დ) 4</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q5">
+            <div class="question-text">5. რომელია ისეთი პირამიდა, რომლის წახნაგების რაოდენობა და წვეროების რაოდენობა ყოველთვის ტოლია?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q5" value="ა"> ა) მხოლოდ წესიერი სამკუთხა პირამიდა</label></li>
+                <li class="option-item"><label><input type="radio" name="q5" value="ბ"> ბ) ნებისმიერი n-კუთხა პირამიდა</label></li>
+                <li class="option-item"><label><input type="radio" name="q5" value="გ"> გ) მხოლოდ ოთხკუთხა პირამიდა</label></li>
+                <li class="option-item"><label><input type="radio" name="q5" value="დ"> დ) ასეთი პირამიდა არ არსებობს</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 2: პრიზმის ზოგადი თვისებები და ფართობები</div>
+
+        <div class="question-card" data-q="q6">
+            <div class="question-text">6. დახრილი პრიზმის გვერდითი ზედაპირის ფართობი ტოლია:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q6" value="ა"> ა) ფუძის პერიმეტრის ნამრავლის გვერდით წიბოზე</label></li>
+                <li class="option-item"><label><input type="radio" name="q6" value="ბ"> ბ) მართობული კვეთის პერიმეტრის ნამრავლის გვერდით წიბოზე</label></li>
+                <li class="option-item"><label><input type="radio" name="q6" value="გ"> გ) ფუძის ფართობის ნამრავლის სიმაღლეზე</label></li>
+                <li class="option-item"><label><input type="radio" name="q6" value="დ"> დ) გვერდითი წახნაგების დიაგონალების ჯამის</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q7">
+            <div class="question-text">7. მართი პრიზმის სიმაღლე ემთხვევა:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q7" value="ა"> ა) ფუძის აპოთემას</label></li>
+                <li class="option-item"><label><input type="radio" name="q7" value="ბ"> ბ) მის გვერდით წიბოს</label></li>
+                <li class="option-item"><label><input type="radio" name="q7" value="გ"> გ) ფუძის დიაგონალს</label></li>
+                <li class="option-item"><label><input type="radio" name="q7" value="დ"> დ) გვერდითი წახნაგის მედიანას</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q8">
+            <div class="question-text">8. წესიერი სამკუთხა პრიზმის ფუძის გვერდია a, ხოლო სიმაღლეა h. რას უდრის ფუძის ფართობი?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q8" value="ა"> ა) a²</label></li>
+                <li class="option-item"><label><input type="radio" name="q8" value="ბ"> ბ) (a²√3) / 4</label></li>
+                <li class="option-item"><label><input type="radio" name="q8" value="გ"> გ) a²√3</label></li>
+                <li class="option-item"><label><input type="radio" name="q8" value="დ"> დ) (a²√2) / 4</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q9">
+            <div class="question-text">9. მართი პრიზმის ფუძე წარმოადგენს რომბს, რომლის დიაგონალებია d₁ და d₂. რას უდრის ამ პრიზმის მოცულობა, თუ სიმაღლეა h?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q9" value="ა"> ა) V = d₁ · d₂ · h</label></li>
+                <li class="option-item"><label><input type="radio" name="q9" value="ბ"> ბ) V = 1/2 · d₁ · d₂ · h</label></li>
+                <li class="option-item"><label><input type="radio" name="q9" value="გ"> გ) V = 1/3 · d₁ · d₂ · h</label></li>
+                <li class="option-item"><label><input type="radio" name="q9" value="დ"> დ) V = 2 · d₁ · d₂ · h</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q10">
+            <div class="question-text">10. რამდენი დიაგონალური კვეთა აქვს ოთხკუთხა პრიზმას?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q10" value="ა"> ა) 1</label></li>
+                <li class="option-item"><label><input type="radio" name="q10" value="ბ"> ბ) 2</label></li>
+                <li class="option-item"><label><input type="radio" name="q10" value="გ"> გ) 4</label></li>
+                <li class="option-item"><label><input type="radio" name="q10" value="დ"> დ) 6</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 3: მართკუთხა და მართი პარალელეპიპედები</div>
+
+        <div class="question-card" data-q="q11">
+            <div class="question-text">11. მართკუთხა პარალელეპიპედის განზომილებებია 2, 3 და 6. რას უდრის მისი დიაგონალის სიგრძე?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q11" value="ა"> ა) 7</label></li>
+                <li class="option-item"><label><input type="radio" name="q11" value="ბ"> ბ) √11</label></li>
+                <li class="option-item"><label><input type="radio" name="q11" value="გ"> გ) 9</label></li>
+                <li class="option-item"><label><input type="radio" name="q11" value="დ"> დ) √43</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q12">
+            <div class="question-text">12. მართკუთხა პარალელეპიპედის სრული ზედაპირის ფართობის გამოსათვლელი სწორი ფორმულაა:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q12" value="ა"> ა) S = abc</label></li>
+                <li class="option-item"><label><input type="radio" name="q12" value="ბ"> ბ) S = ab + bc + ac</label></li>
+                <li class="option-item"><label><input type="radio" name="q12" value="გ"> გ) S = 2(ab + bc + ac)</label></li>
+                <li class="option-item"><label><input type="radio" name="q12" value="დ"> დ) S = 4(a + b + c)</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q13">
+            <div class="question-text">13. მართი პარალელეპიპედის ფუძის გვერდებია 4 სმ და 5 სმ, მათ შორის კუთხე კი 30°-ია. იპოვეთ ფუძის ფართობი.</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q13" value="ა"> ა) 20 სმ²</label></li>
+                <li class="option-item"><label><input type="radio" name="q13" value="ბ"> ბ) 10 სმ²</label></li>
+                <li class="option-item"><label><input type="radio" name="q13" value="გ"> გ) 10√3 სმ²</label></li>
+                <li class="option-item"><label><input type="radio" name="q13" value="დ"> დ) 20√3 სმ²</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q14">
+            <div class="question-text">14. მართკუთხა პარალელეპიპედის დიაგონალი ფუძის სიბრტყესთან ადგენს α კუთხეს. თუ ფუძის დიაგონალია d_ფუძე, რას უდრის პარალელეპიპედის სიმაღლე (h)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q14" value="ა"> ა) h = d_ფუძე · cosα</label></li>
+                <li class="option-item"><label><input type="radio" name="q14" value="ბ"> ბ) h = d_ფუძე · sinα</label></li>
+                <li class="option-item"><label><input type="radio" name="q14" value="გ"> გ) h = d_ფუძე · tgα</label></li>
+                <li class="option-item"><label><input type="radio" name="q14" value="დ"> დ) h = d_ფუძე / tgα</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q15">
+            <div class="question-text">15. თუ მართკუთხა პარალელეპიპედის სამივე განზომილებას გავაორმაგებთ, რამდენჯერ გაიზრდება მისი მოცულობა?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q15" value="ა"> ა) 2-ჯერ</label></li>
+                <li class="option-item"><label><input type="radio" name="q15" value="ბ"> ბ) 4-ჯერ</label></li>
+                <li class="option-item"><label><input type="radio" name="q15" value="გ"> გ) 6-ჯერ</label></li>
+                <li class="option-item"><label><input type="radio" name="q15" value="დ"> დ) 8-ჯერ</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 4: კუბი</div>
+
+        <div class="question-card" data-q="q16">
+            <div class="question-text">16. კუბის სრული ზედაპირის ფართობია 24 სმ². რას უდრის კუბის წიბო?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q16" value="ა"> ა) 2 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q16" value="ბ"> ბ) 4 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q16" value="გ"> გ) √6 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q16" value="დ"> დ) 3 სმ</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q17">
+            <div class="question-text">17. კუბის წიბოა 5 სმ. რას უდრის მისი დიდი დიაგონალის სიგრძე?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q17" value="ა"> ა) 5√2 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q17" value="ბ"> ბ) 5√3 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q17" value="გ"> გ) 15 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q17" value="დ"> დ) 5 სმ</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q18">
+            <div class="question-text">18. კუბის ფუძის დიაგონალია 4 სმ. იპოვეთ ამ კუბის მოცულობა.</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q18" value="ა"> ა) 64 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q18" value="ბ"> ბ) 16√2 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q18" value="გ"> გ) 8√2 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q18" value="დ"> დ) 32 სმ³</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q19">
+            <div class="question-text">19. კუბის დიაგონალური კვეთის ფართობია 16√2 სმ². რას უდრის კუბის მოცულობა?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q19" value="ა"> ა) 64 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q19" value="ბ"> ბ) 16 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q19" value="გ"> გ) 32 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q19" value="დ"> დ) 128 სმ³</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q20">
+            <div class="question-text">20. რას უდრის კუთხე კუბის დიაგონალსა და მის ფუძის სიბრტყეს შორის (კონსპექტის მართკუთხა სამკუთხედის მიხედვით)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q20" value="ა"> ა) კუთხე, რომლის სინუსია 1/√3</label></li>
+                <li class="option-item"><label><input type="radio" name="q20" value="ბ"> ბ) კუთხე, რომლის ტანგენსია 1/√2</label></li>
+                <li class="option-item"><label><input type="radio" name="q20" value="გ"> გ) ზუსტად 45°</label></li>
+                <li class="option-item"><label><input type="radio" name="q20" value="დ"> დ) ზუსტად 30°</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 5: პირამიდის ელემენტები და აპოთემა</div>
+
+        <div class="question-card" data-q="q21">
+            <div class="question-text">21. აპოთემა შეიძლება ჰქონდეს მხოლოდ ისეთ პირამიდას, რომელიც არის:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q21" value="ა"> ა) მართკუთხა</label></li>
+                <li class="option-item"><label><input type="radio" name="q21" value="ბ"> ბ) დახრილი</label></li>
+                <li class="option-item"><label><input type="radio" name="q21" value="გ"> გ) წესიერი</label></li>
+                <li class="option-item"><label><input type="radio" name="q21" value="დ"> დ) ნებისმიერი ტიპის</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q22">
+            <div class="question-text">22. წესიერ პირამიდაში, გვერდითი წიბო (b), სიმაღლე (h) და ფუძის შემოხაზული წრის რადიუსი (R) ქმნიან მართკუთხა სამკუთხედს. რომელი კავშირია სწორი?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q22" value="ა"> ა) b² = h² + R²</label></li>
+                <li class="option-item"><label><input type="radio" name="q22" value="ბ"> ბ) h² = b² + R²</label></li>
+                <li class="option-item"><label><input type="radio" name="q22" value="გ"> გ) R² = h² + b²</label></li>
+                <li class="option-item"><label><input type="radio" name="q22" value="დ"> დ) b = h + R</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q23">
+            <div class="question-text">23. წესიერ პირამიდაში, აპოთემა (l), სიმაღლე (h) და ფუძეში ჩახაზული წრის რადიუსი (r) ქმნიან მართკუთხა სამკუთხედს. რომელი ფორმულაა სწორი?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q23" value="ა"> ა) h² = l² + r²</label></li>
+                <li class="option-item"><label><input type="radio" name="q23" value="ბ"> ბ) l² = h² + r²</label></li>
+                <li class="option-item"><label><input type="radio" name="q23" value="გ"> გ) r² = h² + l²</label></li>
+                <li class="option-item"><label><input type="radio" name="q23" value="დ"> დ) l = h + r</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q24">
+            <div class="question-text">24. წესიერი ოთხკუთხა პირამიდის ფუძის გვერდია 6 სმ, ხოლო აპოთემა 5 სმ-ია. იპოვეთ მისი გვერდითი ზედაპირის ფართობი.</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q24" value="ა"> ა) 30 სმ²</label></li>
+                <li class="option-item"><label><input type="radio" name="q24" value="ბ"> ბ) 60 სმ²</label></li>
+                <li class="option-item"><label><input type="radio" name="q24" value="გ"> გ) 120 სმ²</label></li>
+                <li class="option-item"><label><input type="radio" name="q24" value="დ"> დ) 90 სმ²</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q25">
+            <div class="question-text">25. თუ პირამიდის ყველა გვერდითი წიბო ფუძის სიბრტყესთან ტოლ კუთხეებს ადგენს, მაშინ პირამიდის სიმაღლე გადის ფუძის:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q25" value="ა"> ა) ჩახაზული წრის ცენტრში</label></li>
+                <li class="option-item"><label><input type="radio" name="q25" value="ბ"> ბ) შემოხაზული წრის ცენტრში</label></li>
+                <li class="option-item"><label><input type="radio" name="q25" value="გ"> გ) ერთ-ერთ წვეროზე</label></li>
+                <li class="option-item"><label><input type="radio" name="q25" value="დ"> დ) უდიდესი გვერდის შუაწერტილზე</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 6: პირამიდის მოცულობა და კვეთები</div>
+
+        <div class="question-card" data-q="q26">
+            <div class="question-text">26. პირამიდის სიმაღლეა 9 სმ, ხოლო ფუძის ფართობია 20 სმ². რას უდრის მისი მოცულობა?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q26" value="ა"> ა) 180 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q26" value="ბ"> ბ) 60 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q26" value="გ"> გ) 90 სმ³</label></li>
+                <li class="option-item"><label><input type="radio" name="q26" value="დ"> დ) 200 სმ³</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q27">
+            <div class="question-text">27. წესიერი ოთხკუთხა პირამიდის ყველა წიბო (ფუძისაც და გვერდითიც) ტოლია a-სი. რას უდრის მისი მოცულობა?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q27" value="ა"> ა) (a³√2) / 6</label></li>
+                <li class="option-item"><label><input type="radio" name="q27" value="ბ"> ბ) (a³√2) / 3</label></li>
+                <li class="option-item"><label><input type="radio" name="q27" value="გ"> გ) a³ / 3</label></li>
+                <li class="option-item"><label><input type="radio" name="q27" value="დ"> დ) (a³√3) / 6</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q28">
+            <div class="question-text">28. პირამიდა გადაკვეთილია ფუძის პარალელური სიბრტყით, რომელიც სიმაღლეს ყოფს შეფარდებით 1:2 (წვეროდან მოყოლებული). როგორ შეეფარდება კვეთის ფართობი (S_კვ) ფუძის ფართობას (S_ფუძ)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q28" value="ა"> ა) 1 / 2</label></li>
+                <li class="option-item"><label><input type="radio" name="q28" value="ბ"> ბ) 1 / 4</label></li>
+                <li class="option-item"><label><input type="radio" name="q28" value="გ"> გ) 1 / 9</label></li>
+                <li class="option-item"><label><input type="radio" name="q28" value="დ"> დ) 1 / 3</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q29">
+            <div class="question-text">29. წესიერი სამკუთხა პირამიდის მოცულობაა V. მის შიგნით აგებულია მეორე პირამიდა, რომლის წვერო პირველი პირამიდის ფუძის ცენტრია, ხოლო ფუძე — პირველი პირამიდის გვერდითი წახნაგების შუაწერტილები. რას უდრის მცირე პირამიდის მოცულობა?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q29" value="ა"> ა) V / 4</label></li>
+                <li class="option-item"><label><input type="radio" name="q29" value="ბ"> ბ) V / 8</label></li>
+                <li class="option-item"><label><input type="radio" name="q29" value="გ"> გ) V / 12</label></li>
+                <li class="option-item"><label><input type="radio" name="q29" value="დ"> დ) V / 24</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q30">
+            <div class="question-text">30. ტეტრაედრი ეწოდება პირამიდას, რომლის:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q30" value="ა"> ა) ფუძე კვადრატია</label></li>
+                <li class="option-item"><label><input type="radio" name="q30" value="ბ"> ბ) ყველა წახნაგი სამკუთხედია (სამკუთხა პირამიდა)</label></li>
+                <li class="option-item"><label><input type="radio" name="q30" value="გ"> გ) გვერდითი წიბოები სიმაღლის ტოლია</label></li>
+                <li class="option-item"><label><input type="radio" name="q30" value="დ"> დ) ფუძე მართკუთხა სამკუთხედია</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 7: კუთხეები მრავალწახნაგებში (ორწახნაგა და წრფივი)</div>
+
+        <div class="question-card" data-q="q31">
+            <div class="question-text">31. რა ეწოდება კუთხეს წესიერი პირამიდის გვერდით წახნაგსა და ფუძის სიბრტყეს შორის?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q31" value="ა"> ა) წიბოს დახრის კუთხე</label></li>
+                <li class="option-item"><label><input type="radio" name="q31" value="ბ"> ბ) ორწახნაგა კუთხე ფუძესთან</label></li>
+                <li class="option-item"><label><input type="radio" name="q31" value="გ"> გ) მწვერვალის წრფივი კუთხე</label></li>
+                <li class="option-item"><label><input type="radio" name="q31" value="დ"> დ) დიაგონალური კუთხე</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q32">
+            <div class="question-text">32. თუ პირამიდის ორწახნაგა კუთხე ფუძესთან არის φ, მაშინ რომელი მართკუთხა სამკუთხედიდან ვპოულობთ მას კოსინუსის საშუალებით?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q32" value="ა"> ა) სიმაღლე (h), გვერდითი წიბო (b), რადიუსი (R)</label></li>
+                <li class="option-item"><label><input type="radio" name="q32" value="ბ"> ბ) სიმაღლე (h), აპოთემა (l), ფუძეში ჩახაზული რადიუსი (r)</label></li>
+                <li class="option-item"><label><input type="radio" name="q32" value="გ"> გ) ფუძის გვერდი (a), აპოთემა (l), გვერდითი წიბო (b)</label></li>
+                <li class="option-item"><label><input type="radio" name="q32" value="დ"> დ) ფუძის ორი დიაგონალი</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q33">
+            <div class="question-text">33. წესიერ ოთხკუთხა პირამიდაში აპოთემა ფუძის სიბრტყისადმი დახრილია 60°-იანი კუთხით. თუ ჩახაზული წრის რადიუსი r = 3 სმ, რას უდრის პირამიდის სიმაღლე (h)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q33" value="ა"> ა) 3 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q33" value="ბ"> ბ) 3√3 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q33" value="გ"> გ) 6 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q33" value="დ"> დ) 2√3 სმ</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q34">
+            <div class="question-text">34. მართკუთხა პარალელეპიპედში გვერდითი წახნაგები ერთმანეთთან რა სიდიდის ორწახნაგა კუთხეებს ქმნიან?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q34" value="ა"> ა) 45°</label></li>
+                <li class="option-item"><label><input type="radio" name="q34" value="ბ"> ბ) 60°</label></li>
+                <li class="option-item"><label><input type="radio" name="q34" value="გ"> გ) 90°</label></li>
+                <li class="option-item"><label><input type="radio" name="q34" value="დ"> დ) ეს დამოკიდებულია გვერდების სიგრძეებზე</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q35">
+            <div class="question-text">35. მართი პრიზმის დიაგონალურ კვეთასა და გვერდით წახნაგს შორის კუთხე ზომით ტოლია:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q35" value="ა"> ა) ფუძეში შესაბამის დიაგონალსა და გვერდს შორის კუთხის</label></li>
+                <li class="option-item"><label><input type="radio" name="q35" value="ბ"> ბ) ყოველთვის 90°-ის</label></li>
+                <li class="option-item"><label><input type="radio" name="q35" value="გ"> გ) გვერდითი წიბოს დახრის კუთხის</label></li>
+                <li class="option-item"><label><input type="radio" name="q35" value="დ"> დ) ფუძის სიბრტყის დახრის კუთხის</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 8: კომბინირებული ამოცანები და ფუძის გეომეტრია</div>
+
+        <div class="question-card" data-q="q36">
+            <div class="question-text">36. წესიერი ექვსკუთხა პრიზმის ფუძის გვერდია a. რას უდრის მისი ფუძის ფართობი?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q36" value="ა"> ა) 6a²</label></li>
+                <li class="option-item"><label><input type="radio" name="q36" value="ბ"> ბ) (3a²√3) / 2</label></li>
+                <li class="option-item"><label><input type="radio" name="q36" value="გ"> გ) 3a²√3</label></li>
+                <li class="option-item"><label><input type="radio" name="q36" value="დ"> დ) a²√3</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q37">
+            <div class="question-text">37. წესიერი სამკუთხა პირამიდის ფუძის გვერდია a. რას უდრის ფუძეზე შემოხაზული წრის რადიუსი (R)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q37" value="ა"> ა) a / √3</label></li>
+                <li class="option-item"><label><input type="radio" name="q37" value="ბ"> ბ) a / (2√3)</label></li>
+                <li class="option-item"><label><input type="radio" name="q37" value="გ"> გ) a√3</label></li>
+                <li class="option-item"><label><input type="radio" name="q37" value="დ"> დ) a / 2</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q38">
+            <div class="question-text">38. წესიერი სამკუთხა პირამიდის ფუძის გვერდია a. რას უდრის ფუძეში ჩახაზული წრის რადიუსი (r)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q38" value="ა"> ა) a / √3</label></li>
+                <li class="option-item"><label><input type="radio" name="q38" value="ბ"> ბ) a / (2√3)</label></li>
+                <li class="option-item"><label><input type="radio" name="q38" value="გ"> გ) a√3 / 6</label></li>
+                <li class="option-item"><label><input type="radio" name="q38" value="დ"> დ) ბ და გ ვარიანტები იდენტურია და ორივე სწორია</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q39">
+            <div class="question-text">39. კუბში ჩახაზულია სფერო (ბურთი). თუ კუბის წიბოა 8 სმ, რას უდრის ჩახაზული სფეროს რადიუსი?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q39" value="ა"> ა) 8 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q39" value="ბ"> ბ) 4 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q39" value="გ"> გ) 4√2 სმ</label></li>
+                <li class="option-item"><label><input type="radio" name="q39" value="დ"> დ) 2 სმ</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q40">
+            <div class="question-text">40. კუბზე შემოხაზულია სფერო. თუ კუბის წიბოა a, რას უდრის შემოხაზული სფეროს რადიუსი (R)?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q40" value="ა"> ა) a / 2</label></li>
+                <li class="option-item"><label><input type="radio" name="q40" value="ბ"> ბ) a√2 / 2</label></li>
+                <li class="option-item"><label><input type="radio" name="q40" value="გ"> გ) a√3 / 2</label></li>
+                <li class="option-item"><label><input type="radio" name="q40" value="დ"> დ) a√3</label></li>
+            </ul>
+        </div>
+
+        <div class="section-title">ბლოკი 9: თეორიული დასკვნები და განსაკუთრებული შემთხვევები</div>
+
+        <div class="question-card" data-q="q41">
+            <div class="question-text">41. თუ პირამიდის ყველა გვერდითი წახნაგი ფუძესთან ტოლ კუთხეებს ადგენს, მაშინ გვერდითი ზედაპირის ფართობი (S_გვ) და ფუძის ფართობი (S_ფუძ) დაკავშირებულია ფორმულით:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q41" value="ა"> ა) S_ფუძ = S_გვ · cosφ</label></li>
+                <li class="option-item"><label><input type="radio" name="q41" value="ბ"> ბ) S_გვ = S_ფუძ · cosφ</label></li>
+                <li class="option-item"><label><input type="radio" name="q41" value="გ"> გ) S_ფუძ = S_გვ · sinφ</label></li>
+                <li class="option-item"><label><input type="radio" name="q41" value="დ"> დ) S_გვ = S_ფუძ · tgφ</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q42">
+            <div class="question-text">42. მართი სამკუთხა პრიზმის ყველა წიბო ტოლია. თუ სრული ზედაპირის ფართობია S, გვერდითი ზედაპირი იქნება:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q42" value="ა"> ა) S-ზე მეტი</label></li>
+                <li class="option-item"><label><input type="radio" name="q42" value="ბ"> ბ) ყოველთვის სრული ზედაპირის უდიდესი ნაწილი</label></li>
+                <li class="option-item"><label><input type="radio" name="q42" value="გ"> გ) გამოითვლება როგორც 3a², სადაც a წიბოა</label></li>
+                <li class="option-item"><label><input type="radio" name="q42" value="დ"> დ) ბ და გ ვარიანტები ორივე მართებულია</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q43">
+            <div class="question-text">43. წესიერი ოთხკუთხა პირამიდის დიაგონალური კვეთა წარმოადგენს:</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q43" value="ა"> ა) მართკუთხედს</label></li>
+                <li class="option-item"><label><input type="radio" name="q43" value="ბ"> ბ) ტოლფერდა სამკუთხედს</label></li>
+                <li class="option-item"><label><input type="radio" name="q43" value="გ"> გ) პარალელოგრამს</label></li>
+                <li class="option-item"><label><input type="radio" name="q43" value="დ"> დ) ტრაპეციას</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q44">
+            <div class="question-text">44. რამდენი წახნაგი აქვს წესიერ დოდეკაედრს?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q44" value="ა"> ა) 6</label></li>
+                <li class="option-item"><label><input type="radio" name="q44" value="ბ"> ბ) 8</label></li>
+                <li class="option-item"><label><input type="radio" name="q44" value="გ"> გ) 12</label></li>
+                <li class="option-item"><label><input type="radio" name="q44" value="დ"> დ) 20</label></li>
+            </ul>
+        </div>
+
+        <div class="question-card" data-q="q45">
+            <div class="question-text">45. მატერიალური წერტილი მოძრაობს კუბის ზედაპირზე A წვეროდან მოპირდაპირე G წვერომდე. რა ეწოდება უმოკლეს გზას კუბის წახნაგების გასწვრივ?</div>
+            <ul class="options-list">
+                <li class="option-item"><label><input type="radio" name="q45" value="ა"> ა) კუბის დიაგონალი</label></li>
+                <li class="option-item"><label><input type="radio" name="q45" value="ბ"> ბ) კუბის შლილის სიბრტყეზე აგებული მონაკვეთი</label></li>
+                <li class="option-item"><label><input type="radio" name="q45" value="გ"> გ) წიბოების სიგრძეების ჯამი</label></li>
+                <li class="option-item"><label><input type="radio" name="q45" value="დ"> დ) ფუძის დიაგონალი</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="checkFullQuiz()">კონტროლის დასრულება და შემოწმება</button>
+    </form>
+
+    <div id="result-box"></div>
+</div>
+
+<script>
+    const answerKey = {
+        q1: "ბ", q2: "ბ", q3: "ბ", q4: "ბ", q5: "ბ",
+        q6: "ბ", q7: "ბ", q8: "ბ", q9: "ბ", q10: "ბ",
+        q11: "ა", q12: "გ", q13: "ბ", q14: "გ", q15: "დ",
+        q16: "ა", q17: "ბ", q18: "ბ", q19: "ა", q20: "ბ",
+        q21: "გ", q22: "ა", q23: "ბ", q24: "ბ", q25: "ბ",
+        q26: "ბ", q27: "ა", q28: "გ", q29: "დ", q30: "ბ",
+        q31: "ბ", q32: "ბ", q33: "ბ", q34: "გ", q35: "ა",
+        q36: "ბ", q37: "ა", q38: "დ", q39: "ბ", q40: "გ",
+        q41: "ა", q42: "დ", q43: "ბ", q44: "გ", q45: "ბ"
+    };
+
+    function checkFullQuiz() {
+        let score = 0;
+        const total = Object.keys(answerKey).length;
+        const form = document.getElementById('quiz-form');
+
+        for (let q in answerKey) {
+            const card = document.querySelector(`[data-q="${q}"]`);
+            const userPick = form.elements[q].value;
+            const labels = card.querySelectorAll('.option-item label');
+
+            labels.forEach(lbl => lbl.classList.remove('correct-answer', 'wrong-answer'));
+
+            if (userPick === answerKey[q]) {
+                score++;
+                labels.forEach(lbl => {
+                    if (lbl.querySelector('input').value === userPick) {
+                        lbl.classList.add('correct-answer');
+                    }
+                });
+            } else {
+                labels.forEach(lbl => {
+                    const val = lbl.querySelector('input').value;
+                    if (val === userPick) lbl.classList.add('wrong-answer');
+                    if (val === answerKey[q]) lbl.classList.add('correct-answer');
+                });
+            }
+        }
+
+        const rBox = document.getElementById('result-box');
+        rBox.style.display = "block";
+        let percent = Math.round((score / total) * 100);
+        
+        if (percent >= 85) {
+            rBox.style.backgroundColor = "rgba(46, 204, 113, 0.2)";
+            rBox.style.color = "#27ae60";
+            rBox.innerHTML = `🌟 ბრწყინვალეა! ქულა: ${score} / ${total} (${percent}%)<br>სტერეომეტრიის ამ ნაწილში გამოცდისთვის სრულად მზად ხარ!`;
+        } else if (percent >= 60) {
+            rBox.style.backgroundColor = "rgba(241, 196, 15, 0.2)";
+            rBox.style.color = "#d35400";
+            rBox.innerHTML = `✨ კარგი შედეგია! ქულა: ${score} / ${total} (${percent}%)<br>შეცდომები გაანალიზეთ და ფორმულები კიდევ ერთხელ გადაიკითხეთ.`;
+        } else {
+            rBox.style.backgroundColor = "rgba(231, 76, 60, 0.2)";
+            rBox.style.color = "#c0392b";
+            rBox.innerHTML = `📈 საჭიროებს მუშაობას. ქულა: ${score} / ${total} (${percent}%)<br>გირჩევთ, ფოტო-კონსპექტებს თითოეული ბლოკის მიხედვით თავიდან გადახედოთ.`;
+        }
+
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
+
+```
